@@ -1,0 +1,136 @@
+body {
+    font-family: arial, sans-serif;
+    font-size: 1.1vw;
+}
+
+section {
+    padding: 1em;
+    margin: 0.2em 1em;
+    border: 0.1em dotted #ff9900;
+    border-radius:0.5%;
+    width:50%;
+    
+}
+
+.header {
+    width:52%;
+    margin-left: 0.27em;
+    border:none;
+    height:12em;
+    overflow:hidden;
+}
+
+#welcome-text {
+    position:relative;
+    left:29%;
+    margin-top:-55%;
+    
+}
+
+#burger-joint{
+    opacity:0.6;
+    width:100%;
+    height:auto;
+
+}
+#burger-joint:hover{
+    opacity:1;
+}
+
+#sens-ingredients {
+    font-weight:bold;
+}
+
+.burger-section {
+    background-color: black;
+    color: white;
+    
+}
+
+.customer-info {
+    padding:1em;
+}
+
+button:hover {
+    background-color: lightblue;
+    cursor: pointer; 
+}
+
+#submit-button {
+    /* TODO: Wont keep proportions*/
+    margin-left: 40%;
+    
+}
+
+.wrapper {
+     display: grid;
+     grid-column-gap: 9em;
+     grid-template-columns: 7em 7em 7em;
+     font-size: 0.7em;
+}
+
+.box {
+     padding: 0em;
+     font-size: 150%;
+ 
+}
+
+.title1 {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+}
+
+
+.title2 {
+    grid-column: 2;
+    grid-row: 1;
+    margin-right: -4em;
+    
+}
+
+.title3 {
+    grid-column: 3;
+    grid-row: 1;
+    margin-right: -6em;
+}
+
+.picture1 {
+    grid-column: 1;
+    grid-row: 2;
+    
+}
+
+.picture2 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.picture3 {
+    grid-column: 3;
+    grid-row: 2;
+} 
+
+.ingredients1 {
+    grid-column: 1;
+    grid-row: 3;
+    font-size:1em;
+    margin-right: -6em;
+}
+.ingredients2 {
+    grid-column: 2;
+    grid-row: 3;
+    font-size:1em;
+    margin-right: -6em;
+}
+
+.ingredients3 {
+    grid-column: 3;
+    grid-row: 3;
+    font-size:1em;
+    margin-right: -6em;
+}
+/*
+    burger-menu {
+    width:50%;
+    margin: 0 auto;
+} */
