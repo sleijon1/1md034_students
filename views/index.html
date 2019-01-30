@@ -2,15 +2,16 @@
 <html lang="en">
   <head>
     <script src="https://vuejs.org/js/vue.js"></script>
-    <script src="js/vue_script.js">
-    <script src="js/js_script.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <!-- <script src="js/js_script.js" defer></script> -->
+    <script src="js/vue_script.js" defer></script> 
     <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
-    <title>Ordah Burga</title>
+    <title>WOWB</title>
     <meta charset ="utf-8"/>
   </head>
-    <body>
-
+  <body>
+   
       <main>
         <section class="header">         
                 <img id="burger-joint" src="http://www.insidebusinessnyc.com/wp-content/uploads/2013/06/burgerjoint26.jpg" alt="Welcome Picture" title="Welcome to BO"
@@ -23,49 +24,49 @@
         <h3> Select burger </h3>
         <p> This is where you execute burger selection </p>
 
-        <div class="wrapper">    
-
-          <div class="box title1">Halloumi Burger</div>
-          <div class="box title2">Fried Fish Burger</div>
-          <div class="box title3">Definetly not a Burger</div>
+        <div id="burgerMenu" class="wrapper">    
+          <!--TODO Maybe make this less static-->
+          <div class="box title1">{{ food[0].name }}</div>
+          <div class="box title2">{{ food[1].name }}</div>
+          <div class="box title3">{{ food[2].name }}</div>
 
               <div class="box picture1">
-                <img src="https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg" alt="Halloumi Burger" title="Burger One"
+                <img v-bind:src="food[0].Image" alt="Halloumi Burger" title="Burger One"
                      width="225">
               </div>
 
               <div class="box picture2">
-                <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg" alt="Fish Burger" title="Burger Two"
+                <img v-bind:src="food[1].Image" title="Burger Two" alt="Def not a Burger" title="Burger three"
                      width="225">
 
               </div>
 
               <div class="box picture3">
-                <img src="https://prods3.imgix.net/images/articles/2017_04/Feature-restaurant-butcher-bakery-shops2.jpg?auto=format%2Ccompress&ixjsv=2.2.3&w=670" alt="Def not a Burger" title="Burger three"
+                <img v-bind:src="food[2].Image"
                      width="225" height="168">
                 </div>
 
               <div class="box ingredients1">
               <ul>
-                    <li>0 Calories</li>
-                    <li>Very Veggie</li>
-                    <li>Contains <span id="sens-ingredients"> Jalapenos </span></li>
-                  </ul>
+                    <li v-for="ingredient in food[0].Information">
+                  {{ ingredient }}
+                </li>                 
+              </ul> 
               </div>
 
               <div class="box ingredients2">
                 <ul>
-                  <li>2 Calories</li>
-                  <li>Very Fishy</li>
-                  <li>Contains <span id="sens-ingredients"> Omega 333 </span></li>
+                  <li v-for="ingredient in food[1].Information">
+                    {{ ingredient }}
+                  </li>
                 </ul>
               </div>
 
               <div class="box ingredients3">
                 <ul>
-                  <li>3 Calories</li>
-                  <li>Burger Taste</li>
-                 <li>Contains <span id="sens-ingredients"> Sandwich </span></li>
+                  <li v-for="ingredient in food[2].Information">
+                    {{ ingredient }}
+                  </li>                 
                 </ul>
               </div>
               
@@ -139,6 +140,7 @@
       <hr>
       <footer>
         &copy; 2018 (WOWB) Weirdly Obsessed With Burgers
-      </footer> 
-    </body>
+      </footer>
+     
+  </body>
 </html>
