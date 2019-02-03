@@ -5,7 +5,7 @@ var food = [
         "Ingredient" : "Jalapenos",
         "Descripition" : "Very Veggie",
         "Image" : "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg",
-        "Information" : ["0 kCal", "Jalapenos", "Very Veggie"]
+        "Information" : ["0 kCal", "Gluten", "Very Veggie"]
     },
     {
         "name" : "Fried Fish Burger",
@@ -13,7 +13,7 @@ var food = [
         "Ingredient" : "Omega 333",
         "Descripition" : "Very Fishy",
         "Image" : "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg",
-       "Information" : ["1 kCal", "Omega 333", "Very Fishy"]
+       "Information" : ["1 kCal", "Lactose", "Very Fishy"]
     },
     {
         "name" : "Definetly not a Burger",

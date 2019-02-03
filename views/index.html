@@ -3,8 +3,8 @@
   <head>
     <script src="https://vuejs.org/js/vue.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
-    <!-- <script src="js/js_script.js" defer></script> -->
-    <script src="js/vue_script.js" defer></script> 
+    <script src="js/js_script.js" defer></script> 
+    <!--<script src="js/vue_script.js" defer></script> -->
     <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
     <title>WOWB</title>
@@ -26,50 +26,82 @@
 
         <div id="burgerMenu" class="wrapper">    
           <!--TODO Maybe make this less static-->
-          <div class="box title1">{{ food[0].name }}</div>
-          <div class="box title2">{{ food[1].name }}</div>
-          <div class="box title3">{{ food[2].name }}</div>
-
+            <div class="box title1"><!--{{ food[0].name }}--></div>
+            <div class="box title2"><!--{{ food[1].name }}--></div>
+            <div class="box title3"><!--{{ food[2].name }}--></div>
               <div class="box picture1">
-                <img v-bind:src="food[0].Image" alt="Halloumi Burger" title="Burger One"
-                     width="225">
+                <!--<img v-bind:src="food[0].Image" alt="Halloumi Burger" title="Burger One"
+                     width="225"> -->
               </div>
 
               <div class="box picture2">
-                <img v-bind:src="food[1].Image" title="Burger Two" alt="Def not a Burger" title="Burger three"
-                     width="225">
+                <!--<img v-bind:src="food[1].Image" title="Burger Two" alt="Def not a Burger" title="Burger three"
+                     width="225">-->
 
               </div>
 
               <div class="box picture3">
-                <img v-bind:src="food[2].Image"
-                     width="225" height="168">
+                <!--<img v-bind:src="food[2].Image"
+                     width="225" height="168"> -->
                 </div>
 
               <div class="box ingredients1">
-              <ul>
-                    <li v-for="ingredient in food[0].Information">
-                  {{ ingredient }}
-                </li>                 
-              </ul> 
-              </div>
-
-              <div class="box ingredients2">
-                <ul>
-                  <li v-for="ingredient in food[1].Information">
-                    {{ ingredient }}
-                  </li>
-                </ul>
-              </div>
-
-              <div class="box ingredients3">
-                <ul>
-                  <li v-for="ingredient in food[2].Information">
-                    {{ ingredient }}
-                  </li>                 
-                </ul>
-              </div>
+              <!--<ul>
+                <li v-for="ingredient in food[0].Information">
+                  <p v-if="notAllergic(ingredient) == true">
+                    {{ingredient}}
+                  </p>
+                  <p v-else> Contains
+                    <b> {{ ingredient }} </b>
+                  </p>
+                </li>
+                <li v-if="glutenFree(food[0].Information)">
+                  <p><b>Gluten</b>
+                  <p v-if="lactoseFree(food[0].Information)"> & <b>Lactose</b></p>
+                  Free
+                  </p>
+                </li> 
+              </ul> -->
               
+              </div>
+              <input id="burgerOne" type="checkbox" name="burgerChoice" v-bind:value="food[0].name">
+              <div class="box ingredients2">
+                <!--<ul>
+                  <li v-for="ingredient in food[1].Information">
+                    <p v-if="notAllergic(ingredient) == true">
+                      {{ingredient}}
+                    </p>
+                    <p v-else> Contains
+                      <b> {{ ingredient }} </b>
+                    </p>
+                  </li>
+                  <li v-if="glutenFree(food[1].Information)">
+                    <p><b>Gluten</b>
+                    <p v-if="lactoseFree(food[1].Information)"> & <b>Lactose</b></p> Free
+                    </p>
+                  </li>
+                </ul> -->
+              </div>
+              <input id="burgerTwo" type="checkbox" name="burgerChoice" v-bind:value="food[1].name">
+              <div class="box ingredients3">
+                <!--<ul>
+                  <li v-for="ingredient in food[2].Information">
+                    <p v-if="notAllergic(ingredient) == true">
+                      {{ingredient}}
+                    </p>
+                    <p v-else> Contains
+                      <b> {{ ingredient }} </b>
+                    </p>
+                  </li>
+                  <li v-if="glutenFree(food[2].Information)">
+                    <p><b>Gluten</b>
+                    <p v-if="lactoseFree(food[2].Information)"> & <b>Lactose</b></p>
+                    Free
+                    </p>
+                  </li>
+                </ul> -->
+              </div>
+              <input id="burgerThree" type="checkbox" name="burgerChoice" v-bind:value="food[2].name">                         
           </div>
       </section>
 
@@ -78,7 +110,7 @@
         <p> This is where you provide necessary information </p>
         <h4> Delivery information </h4>
 
-        <form>
+        <form id="customer-form">
             <p>
               <label for="firstname">First</label><br>
               <input type="text" id="firstname" name="fn" required="required" placeholder="First name">
@@ -115,7 +147,7 @@
         </p>
         
           <p>
-            <textarea maxlength="10" placeholder="(note) burgers mmhm.."></textarea>
+            <textarea maxlength="10" placeholder="(note) burgers mmhm.." id="note"></textarea>
           </p>             
 
           <input id="male" type="radio" name="gender" value="male">
@@ -133,10 +165,13 @@
         </form>
         
       </section>
-
-      <button type="submit" id="submit-button"><img src="http://fatcat-designs.com/buttons/files/2011/07/Burger-Button.png" width="50"> Place my order!
-      </button>
-
+      <div id="orders">
+        <button type="submit" id="submit-button" onclick="markDone()" >
+          <img src="http://fatcat-designs.com/buttons/files/2011/07/Burger-Button.png" width="50">
+          Place my order!
+        </button>
+      </div>
+      <p id="disp-cinfo"></p>
       <hr>
       <footer>
         &copy; 2018 (WOWB) Weirdly Obsessed With Burgers

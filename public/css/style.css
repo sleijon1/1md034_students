@@ -68,6 +68,9 @@ button:hover {
      grid-template-columns: 7em 7em 7em;
      font-size: 0.7em;
 }
+.wrapper, radio {
+    margin-bottom:0%;
+}
 
 .box {
      padding: 0em;
@@ -76,7 +79,7 @@ button:hover {
 }
 
 .title1 {
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 1;
     grid-row: 1;
 }
 
@@ -120,7 +123,7 @@ button:hover {
     grid-column: 2;
     grid-row: 3;
     font-size:1em;
-    margin-right: -6em;
+    margin-right: -7em;
 }
 
 .ingredients3 {
