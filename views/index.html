@@ -3,12 +3,13 @@
   <head>
     <script src="https://vuejs.org/js/vue.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
- <!--   <script src="js/js_script.js" defer></script> -->
-   <script src="js/vue_script.js" defer></script> 
-    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
-    <link rel="stylesheet" type="text/css" href="css/style.css"> 
-    <title>WOWB</title>
-    <meta charset ="utf-8"/>
+    <script src="js/js_script.js" defer></script>
+    <!-- Uncomment to view vue version -->
+    <!--<script src="js/vue_script.js" defer></script> -->
+   <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
+   <link rel="stylesheet" type="text/css" href="css/style.css"> 
+   <title>WOWB</title>
+   <meta charset ="utf-8"/>
   </head>
   <body>
    
@@ -26,12 +27,13 @@
 
         <div id="burgerMenu" class="wrapper">
           
+          <!--      Uncomment to use vue version.    
           <div class="box title" v-for="burgerName in burgerNames">
             {{ burgerName }}
           </div>
 
           <div class="box picture" v-for="burgerUrl in burgerUrls">
-            <img v-bind:src="burgerUrl" height="168" width="225">
+            <img v-bind:src="burgerUrl">
           </div>
 
           <div class="box ingredient" v-for="burgerIngredients in burgerInformation">
@@ -55,7 +57,7 @@
           <div class="box selectBurger" v-for="burgerName in burgerNames">
             <input id="burgerName" type="checkbox" name="burgerChoice" v-bind:value="burgerName">
           </div>
-          
+          -->
         </div>            
               
       </section>
@@ -121,8 +123,9 @@
         
       </section>
       <div id="orders">
-        <button type="submit" id="submit-button" v-on:click="markDone()" >
-          <img src="http://fatcat-designs.com/buttons/files/2011/07/Burger-Button.png" width="50">
+        <!--Add v-on:click for vue -->
+        <button type="submit" id="submit-button" onclick="markDone()" >
+          <img src="http://fatcat-designs.com/buttons/files/2011/07/Burger-Button.png">
           Place my order!
         </button>
       </div>
