@@ -18,8 +18,9 @@ function createBurgers(){
     let halloumiBurger = new MenuItem("Halloumi Burger", "0 kcal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
     let friedFishBurger = new MenuItem("Fried Fish Burger", "2 kcal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
     let definetlyNotABurger = new MenuItem("Definetly not a Burger", "3 kcal", "Sandwich", "Burger Taste", "https://prods3.imgix.net/images/articles/2017_04/Feature-restaurant-butcher-bakery-shops2.jpg?auto=format%2Ccompress&ixjsv=2.2.3&w=670");
-    let halloumiBurger2 = new MenuItem("Halloumi Burger 2", "0 kcal", "Jalapenos", "Very veggie");
-    let friedFishBurger2 = new MenuItem("Fried Fish Burger 2", "2 kcal", "Omega 333", "Very Fishy");
+    let halloumiBurger2 = new MenuItem("Halloumi Burger2", "0 kcal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
+    let friedFishBurger2 = new MenuItem("Fried Fish Burger2", "2 kcal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
+
     
     var burgers = [ {MenuItem: halloumiBurger},
                     {MenuItem: friedFishBurger},
@@ -41,23 +42,31 @@ function appendListItem(listNode, textNode){
 
 function displayBurgers(){
     var burgers = createBurgers();
-    for (var i = 1; i < 4; i++) {
+    for (var i = 0; i < burgers.length; i++) {
+        var burgerMenuDiv = document.getElementsByClassName('wrapper')[0];
+        
         // Burger Title
-        var titleNode = document.getElementsByClassName('box title' + i)[0];
-        var burgerName = document.createTextNode(burgers[i-1].MenuItem.burgerName);
-        titleNode.appendChild(burgerName);
+        var titleDiv = document.createElement('div');
+        titleDiv.className = 'box title';
+        var burgerName = document.createTextNode(burgers[i].MenuItem.burgerName);
+        titleDiv.appendChild(burgerName);
+        burgerMenuDiv.appendChild(titleDiv);
 
         // Burger Image
-        var imageNode = document.getElementsByClassName('box picture' + i)[0];
+        var imageDiv = document.createElement('div');
+        imageDiv.className = 'box picture';
         var imageElement = document.createElement("IMG");
-        imageElement.setAttribute("src", burgers[i-1].MenuItem.imageUrl);
+        imageElement.setAttribute("src", burgers[i].MenuItem.imageUrl);
         imageElement.setAttribute("width", "225");
         imageElement.setAttribute("height", "168");
-        imageNode.appendChild(imageElement);
-
+        imageDiv.appendChild(imageElement);
+        burgerMenuDiv.appendChild(imageDiv);
+        
         // Burger Ingredients
-        var ingrNode = document.getElementsByClassName('box ingredients' + i)[0];
-        var ingrArray = burgers[i-1].MenuItem.information;
+       // var ingrNode = document.getElementsByClassName('box ingredients' + i)[0];
+        var ingrDiv = document.createElement('div');
+        ingrDiv.className = 'box ingredients';
+        var ingrArray = burgers[i].MenuItem.information;
         var list = document.createElement("ul");
         var glutenFree = true;
         var lactoseFree = true;
@@ -88,7 +97,7 @@ function displayBurgers(){
             listItem.appendChild(paragraph);
             list.appendChild(listItem);
         }
-        ingrNode.appendChild(list);
+        ingrDiv.appendChild(list);
 
         if(glutenFree){
             var glutenFreeText = document.createTextNode('Gluten Free');
@@ -99,29 +108,48 @@ function displayBurgers(){
             appendListItem(list, lactoseFreeText)
         }
 
-    }
+        burgerMenuDiv.appendChild(ingrDiv);
 
+        var burgerSelectDiv = document.createElement('div');
+        burgerSelectDiv.className = 'box selectBurger';
+        var burgerCheckbox = document.createElement("INPUT");
+        burgerCheckbox.setAttribute("type", "checkbox");
+        burgerCheckbox.setAttribute("name", "burgerChoice");
+        burgerCheckbox.setAttribute("id", burgers[i].MenuItem.burgerName);
+        burgerCheckbox.setAttribute("value", burgers[i].MenuItem.burgerName);
+        burgerSelectDiv.appendChild(burgerCheckbox);
+        burgerMenuDiv.appendChild(burgerSelectDiv);
+        
+    }
 
 }
 
 function displayBurgersJSON(){
-    for (var i = 1; i < 4; i++) {
+    for (var i = 0; i < food.length; i++) {
+        var burgerMenuDiv = document.getElementsByClassName('wrapper')[0];
+        
         // Burger Title
-        var titleNode = document.getElementsByClassName('box title' + i)[0];
-        var burgerName = document.createTextNode(food[i-1].name);
-        titleNode.appendChild(burgerName);
+        var titleDiv = document.createElement('div');
+        titleDiv.className = 'box title';
+        var burgerName = document.createTextNode(food[i].name);
+        titleDiv.appendChild(burgerName);
+        burgerMenuDiv.appendChild(titleDiv);
+        
 
         // Burger Image
-        var imageNode = document.getElementsByClassName('box picture' + i)[0];
+        var imageDiv = document.createElement('div');
+        imageDiv.className = 'box picture';
         var imageElement = document.createElement("IMG");
-        imageElement.setAttribute("src", food[i-1].Image);
+        imageElement.setAttribute("src", food[i].Image);
         imageElement.setAttribute("width", "225");
         imageElement.setAttribute("height", "168");
-        imageNode.appendChild(imageElement);
+        imageDiv.appendChild(imageElement);
+        burgerMenuDiv.appendChild(imageDiv);
 
         // Burger Ingredients
-        var ingrNode = document.getElementsByClassName('box ingredients' + i)[0];
-        var ingrArray = food[i-1].Information;
+        var ingrDiv = document.createElement('div');
+        ingrDiv.className = 'box ingredients';
+        var ingrArray = food[i].Information;
         var list = document.createElement("ul");
         var glutenFree = true;
         var lactoseFree = true;
@@ -152,7 +180,7 @@ function displayBurgersJSON(){
             listItem.appendChild(paragraph);
             list.appendChild(listItem);
         }
-        ingrNode.appendChild(list);
+        ingrDiv.appendChild(list);
 
         if(glutenFree){
             var glutenFreeText = document.createTextNode('Gluten Free');
@@ -162,9 +190,19 @@ function displayBurgersJSON(){
             var lactoseFreeText = document.createTextNode('Lactose Free');
             appendListItem(list, lactoseFreeText)
         }
+        burgerMenuDiv.appendChild(ingrDiv);
 
+        var burgerSelectDiv = document.createElement('div');
+        burgerSelectDiv.className = 'box selectBurger';
+        var burgerCheckbox = document.createElement("INPUT");
+        burgerCheckbox.setAttribute("type", "checkbox");
+        burgerCheckbox.setAttribute("name", "burgerChoice");
+        burgerCheckbox.setAttribute("id", food[i].name);
+        burgerCheckbox.setAttribute("value", food[i].name);
+        burgerSelectDiv.appendChild(burgerCheckbox);
+        burgerMenuDiv.appendChild(burgerSelectDiv);
     }
-    
+   
 }
 
 

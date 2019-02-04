@@ -8,12 +8,12 @@ section {
     margin: 0.2em 1em;
     border: 0.1em dotted #ff9900;
     border-radius:0.5%;
-    width:60%;
+    width:65em;
     
 }
 
 .header {
-    width:62%;
+    width:66.7em;
     margin-left: 0.27em;
     border:none;
     height:12em;
@@ -22,8 +22,8 @@ section {
 
 #welcome-text {
     position:relative;
-    left:29%;
-    margin-top:-55%;
+    left:16em;
+    margin-top:-27em;
     
 }
 
@@ -64,8 +64,9 @@ button:hover {
 
 .wrapper {
      display: grid;
-     grid-column-gap: 9em;
-     grid-template-columns: 7em 7em 7em;
+     grid-template-columns: auto auto auto;
+     grid-template-rows: auto auto;
+     grid-gap: 5px;
      font-size: 0.7em;
 }
 .wrapper, radio {
@@ -75,65 +76,25 @@ button:hover {
 .box {
      padding: 0em;
      font-size: 150%;
+     grid-auto-flow:row;
  
 }
-
-.title1 {
-    grid-column: 1 / span 1;
-    grid-row: 1;
+.title {
+    grid-row:1;
+   
 }
 
-
-.title2 {
-    grid-column: 2;
-    grid-row: 1;
-    margin-right: -4em;
-    
+.pictures {
+    grid-row:2;
+   
 }
 
-.title3 {
-    grid-column: 3;
-    grid-row: 1;
-    margin-right: -6em;
+.ingredients {
+    grid-row:3;
+
 }
 
-.picture1 {
-    grid-column: 1;
-    grid-row: 2;
-    
+.selectBurger {
+    grid-row:4;
+    margin-left:2em;
 }
-
-.picture2 {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.picture3 {
-    grid-column: 3;
-    grid-row: 2;
-} 
-
-.ingredients1 {
-    grid-column: 1;
-    grid-row: 3;
-    font-size:1em;
-    margin-right: -6em;
-}
-.ingredients2 {
-    grid-column: 2;
-    grid-row: 3;
-    font-size:1em;
-    margin-right: -7em;
-}
-
-.ingredients3 {
-    grid-column: 3;
-    grid-row: 3;
-    font-size:1em;
-    margin-right: -6em;
-}
-/*
-    burger-menu {
-    width:50%;
-    margin: 0 auto;
-} */

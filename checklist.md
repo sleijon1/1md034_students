@@ -43,7 +43,7 @@ Create a style.css file which contains:
 ## 04 JavaScript
 
 Create a menu.js file which contains:
-- [ ] At least five different burgers with respective attributes
+- [X] At least five different burgers with respective attributes
 
 Create a js_script.js file which contains:
 - [X] A MenuItem constructor 

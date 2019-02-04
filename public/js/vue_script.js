@@ -1,3 +1,39 @@
+// MenuItem constructor
+function MenuItem(name, cal, ingr, desc, image){
+    this.burgerName = name;
+    this.burgerCalories = cal;
+    this.burgerIngredient = ingr;
+    this.description = desc;
+    this.imageUrl = image;
+
+    this.information = [cal, ingr, desc];
+    
+    this.burger = function(){
+        return "Burger: " + 
+               this.burgerName + ', ' + this.burgerCalories + ', ' + this.burgerIngredient;
+		}
+
+    
+}
+
+function createBurgers(){
+    let halloumiBurger = new MenuItem("Halloumi Burger", "0 kcal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
+    let friedFishBurger = new MenuItem("Fried Fish Burger", "2 kcal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
+    let definetlyNotABurger = new MenuItem("Definetly not a Burger", "3 kcal", "Sandwich", "Burger Taste", "https://prods3.imgix.net/images/articles/2017_04/Feature-restaurant-butcher-bakery-shops2.jpg?auto=format%2Ccompress&ixjsv=2.2.3&w=670");
+    let halloumiBurger2 = new MenuItem("Halloumi Burger2", "0 kcal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
+    let friedFishBurger2 = new MenuItem("Fried Fish Burger2", "2 kcal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
+
+    
+    var burgers = [ {MenuItem: halloumiBurger},
+                    {MenuItem: friedFishBurger},
+                    {MenuItem: definetlyNotABurger},
+                    {MenuItem: halloumiBurger2},
+                    {MenuItem: friedFishBurger2},
+                  ];
+
+    return burgers;
+}
+
 function readForm (){
     var form = document.getElementById("customer-form");
     var customerInfo = [];
@@ -40,8 +76,10 @@ function readForm (){
 var vm = new Vue({
   el: '#burgerMenu',
   data: {
-      food,
-      allergic : [{type: "Gluten"}, {type: "Lactose"}]
+      allergic : [{type: "Gluten"}, {type: "Lactose"}],
+      burgerNames : [],
+      burgerUrls : [],
+      burgerInformation : []
   },
     methods: {
         notAllergic : function(ingredient){
@@ -65,10 +103,41 @@ var vm = new Vue({
             }else{
                 return true;
             }
+        },  
+        loadBurgerNames : function(burgers){
+            for (var i = 0; i < food.length; i++) {
+                this.burgerNames.push(burgers[i].name);
+            }
+        },
+        loadBurgerPictures : function(burgers){
+            for (var i = 0; i < food.length; i++) {
+                this.burgerUrls.push(burgers[i].Image);
+            }        
+        },
+        loadBurgerIngredients : function(burgers){
+            for (var i = 0; i < food.length; i++) {
+                this.burgerInformation.push(burgers[i].Information);
+            }
+        },
+        loadBurgersJSON : function(){
+            this.loadBurgerNames(food);
+            this.loadBurgerPictures(food);
+            this.loadBurgerIngredients(food);
+        },
+        loadBurgers : function(){
+            var constructedBurgers = createBurgers();
+            for (var i = 0; i < constructedBurgers.length; i++) {
+                this.burgerNames.push(constructedBurgers[i].MenuItem.burgerName);
+                this.burgerUrls.push(constructedBurgers[i].MenuItem.imageUrl);
+                this.burgerInformation.push(constructedBurgers[i].MenuItem.information);
+            }
         }
         
     }
 })
+
+//vm.loadBurgers();
+vm.loadBurgersJSON();
 
 var vm2 = new Vue ({
     el: '#orders',
