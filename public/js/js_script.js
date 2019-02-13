@@ -15,11 +15,11 @@ function MenuItem(name, cal, ingr, desc, image){
 }
 
 function createBurgers(){
-    let halloumiBurger = new MenuItem("Halloumi Burger", "0 kcal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
-    let friedFishBurger = new MenuItem("Fried Fish Burger", "2 kcal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
-    let definetlyNotABurger = new MenuItem("Definetly not a Burger", "3 kcal", "Sandwich", "Burger Taste", "https://prods3.imgix.net/images/articles/2017_04/Feature-restaurant-butcher-bakery-shops2.jpg?auto=format%2Ccompress&ixjsv=2.2.3&w=670");
-    let halloumiBurger2 = new MenuItem("Halloumi Burger2", "0 kcal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
-    let friedFishBurger2 = new MenuItem("Fried Fish Burger2", "2 kcal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
+    let halloumiBurger = new MenuItem("Halloumi Burger", "0 kCal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
+    let friedFishBurger = new MenuItem("Fried Fish Burger", "2 kCal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
+    let definetlyNotABurger = new MenuItem("Definetly not a Burger", "3 kCal", "Sandwich", "Burger Taste", "https://prods3.imgix.net/images/articles/2017_04/Feature-restaurant-butcher-bakery-shops2.jpg?auto=format%2Ccompress&ixjsv=2.2.3&w=670");
+    let halloumiBurger2 = new MenuItem("Halloumi Burger2", "0 kCal", "Gluten", "Very veggie", "https://www.carolinescooking.com/wp-content/uploads/2018/05/halloumi-burger-photo.jpg");
+    let friedFishBurger2 = new MenuItem("Fried Fish Burger2", "2 kCal", "Lactose", "Very Fishy", "https://media-cdn.tripadvisor.com/media/photo-s/0e/63/a9/9b/huge-fish-sandwich-4.jpg");
 
     
     var burgers = [ {MenuItem: halloumiBurger},
@@ -212,6 +212,21 @@ displayBurgersJSON();
 
 
 function readForm (){
+    var customerInfo = readCustomerInfo();
+
+    var orderedBurgers = readBurgers();
+    
+    for (i = 0; i < orderedBurgers.length; i++) {
+            customerInfo.unshift(orderedBuregers[i]);
+        }
+
+    console.log(customerInfo);
+    
+    return customerInfo;
+}
+
+
+function readCustomerInfo(){
     var form = document.getElementById("customer-form");
     var customerInfo = [];
     var i;
@@ -229,6 +244,12 @@ function readForm (){
         }
     }
 
+    return customerInfo;
+}
+
+function readBurgers(){
+    var orderedBurgers = [];
+    
     var burgerMenu = document.getElementsByName("burgerChoice");
     var burgerChosen = false;
     var i;
@@ -236,7 +257,7 @@ function readForm (){
     for (i = 0; i < burgerMenu.length; i++) {
         if(burgerMenu[i].checked == true){
             // Maybe change to pop, unshift might be very inefficient
-            customerInfo.unshift(food[i].name);
+            orderedBurgers.push(food[i].name);
             burgerChosen = true;
         }
     }
@@ -244,10 +265,7 @@ function readForm (){
     if(burgerChosen == false){
         console.log("No burger chosen!")
     }
-
-    console.log(customerInfo);
-    
-    return customerInfo;
+    return orderedBurgers;
 }
 
 function markDone(){

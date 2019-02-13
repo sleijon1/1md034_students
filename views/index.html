@@ -3,13 +3,17 @@
   <head>
     <script src="https://vuejs.org/js/vue.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
-    <script src="js/js_script.js" defer></script>
-    <!-- Uncomment to view vue version -->
-    <!--<script src="js/vue_script.js" defer></script> -->
+    <script src="js/js_script.js" defer></script> 
+    <!-- Uncomment to use vue version -->
+    <!--  <script src="js/vue_script.js" defer></script> -->
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="js/deli-very.js" defer></script>
    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
-   <link rel="stylesheet" type="text/css" href="css/style.css"> 
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <link rel="stylesheet" href="css/deli-very.css">
    <title>WOWB</title>
    <meta charset ="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
    
@@ -27,7 +31,8 @@
 
         <div id="burgerMenu" class="wrapper">
           
-          <!--      Uncomment to use vue version.    
+         <!-- Uncomment this section to use vue version 
+
           <div class="box title" v-for="burgerName in burgerNames">
             {{ burgerName }}
           </div>
@@ -47,9 +52,10 @@
                 </p>
               </li>
               <li v-if="glutenFree(burgerIngredients)">
-                <p><b>Gluten</b>
-                <p v-if="lactoseFree(burgerIngredients)"> & <b>Lactose</b></p> Free
-                </p>
+                <p><b>Gluten</b> Free  </p>
+              </li>
+              <li v-if="lactoseFree(burgerIngredients)">
+               <p> <b>Lactose</b> Free </p>
               </li>
             </ul> 
           </div>
@@ -57,17 +63,19 @@
           <div class="box selectBurger" v-for="burgerName in burgerNames">
             <input id="burgerName" type="checkbox" name="burgerChoice" v-bind:value="burgerName">
           </div>
-          -->
-        </div>            
-              
+
+          -->          
+
+        </div>
+         
       </section>
+      <div id="info_wrapper">
+        <section class="customer-info">
+          <h3> Customer information </h3>
+          <p> This is where you provide necessary information </p>
+          <h4> Delivery information </h4>
 
-      <section class="customer-info">
-        <h3> Customer information </h3>
-        <p> This is where you provide necessary information </p>
-        <h4> Delivery information </h4>
-
-        <form id="customer-form">
+          <form id="customer-form">
             <p>
               <label for="firstname">First</label><br>
               <input type="text" id="firstname" name="fn" required="required" placeholder="First name">
@@ -81,53 +89,56 @@
               <label for="email">E-mail</label><br>
               <input type="email" id="email" name="em" required="required" placeholder="E-mail address">
             </p>
-        
+            <h1> Click in the map! </h1>
+            <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+            <div class="view-box">
+              <div id="dots" v-on:click="displayOrder">
+                <div
+                  v-for="order in currentOrder"
+                  v-bind:style="{ left: currentOrder.details.x + 'px', top: currentOrder.details.y + 'px'}">
+                  T
+                </div>
+              </div>
+            </div>
+            
             <p>
-              <label for="street">Street</label><br>
-              <input type="text" id="street" name="st" required="required" placeholder="Street Name">
+              <label for="payment">Payment options</label><br>
+              <select id="payment" name="paym">
+                <option>Credit Card</option>
+                <option>Cash</option>
+                <option>Samsung Pay</option>
+                <option>Paypal</option>
+                <option selected="selected">Klarna Faktura</option>
+                <option>Krypto</option>
+              </select>
             </p>
+            
             <p>
-              <label for="housenumber">House</label><br>
-              <input type="number" id="housenumber" name="hn" required="required" placeholder="House number">
-            </p>
-        
-        <p>
-          <label for="payment">Payment options</label><br>
-          <select id="payment" name="paym">
-            <option>Credit Card</option>
-            <option>Cash</option>
-            <option>Samsung Pay</option>
-            <option>Paypal</option>
-            <option selected="selected">Klarna Faktura</option>
-            <option>Krypto</option>
-          </select>
-        </p>
-        
-          <p>
-            <textarea maxlength="10" placeholder="(note) burgers mmhm.." id="note"></textarea>
-          </p>             
+              <textarea maxlength="10" placeholder="(note) burgers mmhm.." id="note"></textarea>
+            </p>             
 
-          <input id="male" type="radio" name="gender" value="male">
-          <label for="male">Male</label><br>
-         
-          <input id="female"type="radio" name="gender" value="female">
-          <label for="female">Female</label><br>
+            <input id="male" type="radio" name="gender" value="male">
+            <label for="male">Male</label><br>
+            
+            <input id="female"type="radio" name="gender" value="female">
+            <label for="female">Female</label><br>
+            
+            <input id="nonbinary" type="radio" name="gender" value="Non-binary">
+            <label for="nonbinary">Non-binary</label><br>
+            
+            <input id="undisclosed" type="radio" name="gender" value="Undisclosed" checked="checked">
+            <label for="undisclosed">Undisclosed</label>
+            
+          </form>
           
-          <input id="nonbinary" type="radio" name="gender" value="Non-binary">
-          <label for="nonbinary">Non-binary</label><br>
-          
-          <input id="undisclosed" type="radio" name="gender" value="Undisclosed" checked="checked">
-          <label for="undisclosed">Undisclosed</label>
-        
-        </form>
-        
-      </section>
-      <div id="orders">
-        <!--Add v-on:click for vue -->
-        <button type="submit" id="submit-button" onclick="markDone()" >
-          <img src="http://fatcat-designs.com/buttons/files/2011/07/Burger-Button.png">
-          Place my order!
-        </button>
+        </section>
+        <div id="orders">
+          <!--Add v-on:click for vue -->
+          <button type="submit" id="submit-button" v-on:click="addOrder" >
+            <img src="http://fatcat-designs.com/buttons/files/2011/07/Burger-Button.png">
+            Place my order!
+          </button>
+        </div>
       </div>
       <p id="disp-cinfo"></p>
       <hr>
